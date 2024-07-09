@@ -3,7 +3,10 @@ import { GoArrowSmallDown, GoArrowSmallUp } from "react-icons/go";
 import Table from "./Table";
 function SortableTable(props) {
   const { config, data } = props;
-  const { sortOrder, sortBy, sortedData, handleClick } = useSort(data, config);
+  const { sortOrder, sortBy, sortedData, setSortColumn } = useSort(
+    data,
+    config
+  );
 
   const updatedConfig = config.map((column) => {
     if (!column.sortValue) {
@@ -14,7 +17,7 @@ function SortableTable(props) {
       header: () => (
         <th
           className="cursor-pointer hover:bg-gray-100"
-          onClick={() => handleClick(column.label)}
+          onClick={() => setSortColumn(column.label)}
         >
           <div className="flex items-center">
             {getIcons(column.label, sortBy, sortOrder)}
